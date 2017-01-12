@@ -22,11 +22,11 @@ BlogPosts.create('Fifth Post', 'This is my fifth post', 'Aleah Manzi', '1/25/17'
 
 
 // GET
-app.get('/blog-posts', (req, res) => {
+router.get('/blog-posts', (req, res) => {
   res.json(BlogPosts.get());
 });
 
-app.post('/blog-posts', jsonParser, (req, res) => {
+router.post('/blog-posts', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['title', 'content'];
   for (let i=0; i<requiredFields.length; i++) {
@@ -45,7 +45,7 @@ app.post('/blog-posts', jsonParser, (req, res) => {
 
 // PUT
 
-app.put('/blog-posts/:id', jsonParser, (req, res) => {
+router.put('/blog-posts/:id', jsonParser, (req, res) => {
   const requiredFields = ['title', 'content', 'id'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -75,15 +75,11 @@ app.put('/blog-posts/:id', jsonParser, (req, res) => {
 
 // DELETE
 
-app.delete('/blog-posts/:id', (req, res) => {
+router.delete('/blog-posts/:id', (req, res) => {
   BlogPosts.delete(req.params.id);
   console.log(`Deleted Blog post \`${req.params.ID}\``);
   res.status(204).end();
 });
 
-
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
-});
 
 module.exports = router;
