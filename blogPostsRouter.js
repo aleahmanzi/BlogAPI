@@ -68,7 +68,8 @@ router.put('/:id', jsonParser, (req, res) => {
     author: req.body.author,
     publishDate: req.body.publishDate
   });
-  res.status(204).json(updatedItem);
+  console.log('here is our updated item', updatedItem);
+  res.status(202).json(updatedItem);
 });
 
 // DELETE
