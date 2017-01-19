@@ -48,8 +48,8 @@ describe('BlogPosts', function() {
   	 	res.should.be.json;
   	 	res.body.should.be.a('object');
   	 	res.body.should.include.keys('id', 'title', 'content');
-  	 	res.body.name.should.equal(newPost.name);
-  	 	res.body.content.should.include.members(newPost.content);
+  	 	res.body.title.should.equal(newPost.title);
+  	 	res.body.content.should.equal(newPost.content);
   	 });
   });
 
@@ -64,16 +64,17 @@ describe('BlogPosts', function() {
       .then(function(res) {
         updateData.id = res.body[0].id;
         return chai.request(app)
-          .put(`/recipes/${updateData.id}`)
+          .put(`/blog-posts/${updateData.id}`)
           .send(updateData)
       })
       .then(function(res) {
-        res.should.have.status(200);
+        console.log('here is the current body', res.body);
+        res.should.have.status(202);
         res.body.should.be.a('object');
         res.body.should.include.keys('id', 'title', 'content');
-        res.body.name.should.equal(updateData.name);
+        res.body.title.should.equal(updateData.title);
         res.body.id.should.equal(updateData.id);
-        res.body.content.should.include.members(updateData.content);
+        res.body.content.should.equal(updateData.content);
       });
   });
 
