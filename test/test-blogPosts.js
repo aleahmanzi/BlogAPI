@@ -48,8 +48,8 @@ describe('BlogPosts', function() {
   	 	res.should.be.json;
   	 	res.body.should.be.a('object');
   	 	res.body.should.include.keys('id', 'title', 'content');
-  	 	res.body.name.should.equal(newPost.name);
-  	 	res.body.content.should.include.members(newPost.content);
+  	 	res.body.title.should.equal(newPost.title);
+  	 	res.body.content.should.equal(newPost.content);
   	 });
   });
 
